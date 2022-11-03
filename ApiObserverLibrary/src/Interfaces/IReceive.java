@@ -4,16 +4,10 @@
  */
 package Interfaces;
 
-import Observer.AbstractObserver;
-
-
-
 /**
  *
  * @author Esteb
  */
-public interface IObservable {
-    public void addObserver(AbstractObserver observer);       
-    public void removeObserver(AbstractObserver observer);       
-    public void notifyAllObservers(Object source);   
+public interface IReceive <T> {
+    public T receive();
 }

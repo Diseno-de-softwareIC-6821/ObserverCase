@@ -4,6 +4,7 @@
  */
 package Socket;
 
+import Interfaces.IReceive;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -13,7 +14,7 @@ import java.net.Socket;
  *
  * @author Esteb
  */
-public class SocketClient extends Thread{
+public class SocketClient extends Thread implements IReceive<Object>{
     private Socket socketConnect;
     
     public SocketClient(){
@@ -24,7 +25,8 @@ public class SocketClient extends Thread{
             System.out.println("Error to connect client");
         }   
     }
-    public Object getMessage(){
+    @Override
+    public Object receive() {
         Object objectRecieved = null;
         try{
             InputStream entry = socketConnect.getInputStream();

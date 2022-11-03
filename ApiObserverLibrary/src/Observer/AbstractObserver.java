@@ -6,7 +6,7 @@ package Observer;
 
 import Interfaces.IObservable;
 import Interfaces.IObserver;
-import Socket.IRecieve;
+import Interfaces.IReceive;
 import Socket.SocketClient;
 import java.io.Serializable;
 
@@ -14,13 +14,14 @@ import java.io.Serializable;
  *
  * @author Esteb
  */
-public abstract class AbstractObserver implements IObserver, Serializable, IRecieve<Object>{
+public abstract class AbstractObserver implements IObserver, Serializable, IReceive<Object>{
     private final SocketClient client =new SocketClient();
-    //esta clase implementería de cierta forma el proxy
+    //esta clase se implementería de cierta forma como un proxy
     
-    @Override
-    public Object getMessage(){ //de esta forma el cliente no se toca
-        return client.getMessage(); 
+    
+    @Override 
+    public Object receive(){
+        return client.receive();
     }
     
 }
