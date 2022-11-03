@@ -18,6 +18,7 @@ public class AdmCelebrities {
         listaCelebridades = new ArrayList<>();
     }
     
+    
     public static AdmCelebrities getInstance(){
         if(instance ==null ){
             instance = new AdmCelebrities();
@@ -32,7 +33,7 @@ public class AdmCelebrities {
     }
     public Celebrity search(String name){
         for(Celebrity oneCelebrity: listaCelebridades){
-            if(oneCelebrity.equals(name)){
+            if(oneCelebrity.getName().equals(name)){
                 return oneCelebrity;
             }
         }
@@ -40,5 +41,9 @@ public class AdmCelebrities {
     }
     public void inactivate(Celebrity celebrity){ //darse de baja
         celebrity.setState(false);
+    }
+
+    public ArrayList<Celebrity> getListaCelebridades() {
+        return listaCelebridades;
     }
 }

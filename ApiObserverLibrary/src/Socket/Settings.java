@@ -12,9 +12,11 @@ public class Settings {
     private static Settings instance;
     private int PORT;
     private String HOST;
+    private boolean isActive;
     private Settings(){
         this.PORT = 5000; 
         this.HOST = "localhost";
+        this.isActive = true;
     }
     
     public static Settings getInstance(){
@@ -39,6 +41,15 @@ public class Settings {
     public void setHOST(String HOST) {
         this.HOST = HOST;
     }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void turnOff(){
+        this.isActive = false;
+    }
+   
     
 
     

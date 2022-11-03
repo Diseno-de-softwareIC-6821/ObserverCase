@@ -13,27 +13,26 @@ import java.net.Socket;
  *
  * @author Esteb
  */
-public class SocketClient <T> {
+public class SocketClient extends Thread{
     private Socket socketConnect;
     
     public SocketClient(){
-        try{
+        try{      
+            System.out.println("Client connected!");
             socketConnect = new Socket(Settings.getInstance().getHOST(),Settings.getInstance().getPORT());
-            System.out.println("Client conected! ");
         }catch(IOException e){
             System.out.println("Error to connect client");
         }   
     }
-    public T getMessage(){
-        T objectRecieved = null;
+    public Object getMessage(){
+        Object objectRecieved = null;
         try{
             InputStream entry = socketConnect.getInputStream();
             ObjectInputStream chanel = new ObjectInputStream(entry);
-            objectRecieved = (T) chanel.readObject();
-            
+            objectRecieved = chanel.readObject();
+            return objectRecieved;
         }catch(IOException|ClassNotFoundException e){
             System.out.println(e);
-        }finally{
             return objectRecieved;
         }
     }

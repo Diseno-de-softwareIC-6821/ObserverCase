@@ -9,6 +9,7 @@ import Interfaces.IObservable;
 import Interfaces.IObserver;
 import Socket.SocketServer;
 import java.io.IOException;
+import java.io.Serializable;
 
 import java.util.ArrayList;
 
@@ -17,7 +18,7 @@ import java.util.ArrayList;
  *
  * @author Esteb
  */
-public abstract class AbstractObservable implements IObservable{
+public abstract class AbstractObservable implements IObservable, Serializable{
     private final ArrayList<IObserver> observers = new ArrayList<>();
     @Override       
     public void addObserver(IObserver observer) {           

@@ -7,12 +7,13 @@ package Observer;
 import Interfaces.IObservable;
 import Interfaces.IObserver;
 import Socket.SocketClient;
+import java.io.Serializable;
 
 /**
  *
  * @author Esteb
  */
-public abstract class AbstractObserver implements IObserver{
+public abstract class AbstractObserver implements IObserver, Serializable{
     public final SocketClient client =new SocketClient();;
     
     

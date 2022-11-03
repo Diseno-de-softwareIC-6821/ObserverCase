@@ -9,6 +9,7 @@ import Control.PostFactory;
 import Observer.AbstractObservable;
 import Socket.SocketServer;
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.ArrayList;
 
@@ -16,7 +17,7 @@ import java.util.ArrayList;
  *
  * @author Esteb
  */
-public class Celebrity extends AbstractObservable{
+public class Celebrity extends AbstractObservable implements Serializable{
     private String name;
     private ArrayList<Follower> followers;
     private boolean isActive; 
@@ -45,7 +46,7 @@ public class Celebrity extends AbstractObservable{
     public void sendPost(Post newpost) throws IOException{
         SocketServer.getInstance().sendMessage(newpost);
         addPost(newpost);
-        notifyAllObservers(newpost);
+        notifyAllObservers(this);
     }
     
     public void incrementLevel(){

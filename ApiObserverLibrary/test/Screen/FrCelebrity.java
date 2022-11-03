@@ -1,6 +1,10 @@
+package Screen;
+
 
 import Control.AdmCelebrities;
 import Model.Celebrity;
+import Socket.Settings;
+import Socket.SocketServer;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,6 +27,8 @@ public class FrCelebrity extends javax.swing.JFrame {
     Celebrity actual;
     public FrCelebrity() {
         initComponents();
+        Settings.getInstance().setPORT(60000);
+       
     }
 
     /**
@@ -48,6 +54,12 @@ public class FrCelebrity extends javax.swing.JFrame {
         jButtonAddcelebrity.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAddcelebrityActionPerformed(evt);
+            }
+        });
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
             }
         });
 
@@ -78,18 +90,20 @@ public class FrCelebrity extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonAddcelebrity)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(72, 72, 72))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonAddcelebrity)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jButtonSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
@@ -118,14 +132,14 @@ public class FrCelebrity extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonAddcelebrityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddcelebrityActionPerformed
-        Celebrity c =AdmCelebrities.getInstance().createCelebrity(jTextField1.getText());
+        Celebrity c =AdmCelebrities.getInstance().createCelebrity(jTextField1.getText().trim());
         AdmCelebrities.getInstance().addCelebrity(c);
-        
+        JOptionPane.showMessageDialog(null, "new added");
     }//GEN-LAST:event_jButtonAddcelebrityActionPerformed
 
     private void jButtonSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSearchActionPerformed
         String name = JOptionPane.showInputDialog("Ingrese la celebridad a buscar");
-        Celebrity c = AdmCelebrities.getInstance().search(name);
+        Celebrity c = AdmCelebrities.getInstance().search(name.trim());
         if(c != null){
             actual = c;
             this.jLabel1.setText(name);
@@ -135,13 +149,19 @@ public class FrCelebrity extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSearchActionPerformed
 
     private void jButtonPostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPostActionPerformed
-        try {
-            actual.createPost(jTextAreaPost.getText());
-        } catch (IOException ex) {
-            Logger.getLogger(FrCelebrity.class.getName()).log(Level.SEVERE, null, ex);
+        if(actual != null){
+            try {
+                actual.createPost(jTextAreaPost.getText());
+            } catch (IOException ex) {
+                Logger.getLogger(FrCelebrity.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         
     }//GEN-LAST:event_jButtonPostActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,7 +194,10 @@ public class FrCelebrity extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+           
                 new FrCelebrity().setVisible(true);
+             
+                
             }
         });
     }

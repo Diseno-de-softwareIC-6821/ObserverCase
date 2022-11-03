@@ -8,12 +8,13 @@ import Control.EPostType;
 import Control.PostFactory;
 import Socket.SocketServer;
 import java.io.IOException;
+import java.io.Serializable;
 
 /**
  *
  * @author Esteb
  */
-public class Post {
+public class Post implements Serializable{
     private String title;
     private String message;
     private Celebrity celebrity;
@@ -51,6 +52,7 @@ public class Post {
             dislikes-=1;
         }
     }
+    
 
     public String getMessage() {
         return message;
@@ -70,6 +72,10 @@ public class Post {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getTitle() {
+        return title;
     }
     
    
