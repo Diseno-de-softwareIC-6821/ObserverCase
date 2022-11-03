@@ -46,7 +46,7 @@ public class Settings {
         return isActive;
     }
 
-    public void turnOff(){
+    public void turnOffServer(){
         this.isActive = false;
     }
    

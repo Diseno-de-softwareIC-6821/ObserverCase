@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * @author Esteb
  * @param <T>
  */
-public class SocketServer extends Thread{
+public class SocketServer extends Thread implements ISend<Object>{
     private ServerSocket socketServer;
     private  java.net.Socket socketConnet;
     private static SocketServer instance;
@@ -52,6 +52,7 @@ public class SocketServer extends Thread{
             Logger.getLogger(SocketServer.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    @Override
     public void sendMessage(Object message){
         if(this.socketConnet != null){
             try {
@@ -64,6 +65,8 @@ public class SocketServer extends Thread{
             } catch (IOException ex) {
                 System.out.println("\n***Error:\n"+ex);
             }
+        }else{
+            System.out.println("No clients connected");
         }
         
     }

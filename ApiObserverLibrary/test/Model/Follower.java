@@ -55,7 +55,7 @@ public class Follower extends AbstractObserver{
 
     @Override
     public void notifyObserver( Object source) {
-        Post post = (Post) this.client.getMessage();
+        Post post = (Post) this.getMessage();
         Celebrity celebrity = (Celebrity) source;
         if(searchCelebrity(celebrity) != null){
             //si son iguales es porque el post es para este follower
