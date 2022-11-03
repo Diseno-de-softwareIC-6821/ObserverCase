@@ -1,0 +1,27 @@
+Instrucciones!! 
+está en el repositorio de Github de este caso en esta ruta: ObserverCase\ApiObserverLibrary\dist\ApiObserver.jar
+Se supone que envía objetos por sockets y la vara pero puede dar errores en las aplicaciones; si fuera en caso me lo hacen saber para ver que es
+En todo caso voy a empezar con el proyecto de la red social en un proyecto aparte igual en el mismo repo y quizá mañana lo podemos continuar
+
+Ahora...la librería se usa así
+Hay un archivo de configuración que se llama "Settings" ese es un singleton
+Si queremos que el cliente y el servidor se comuniquen tienen que estar en el mismo puerto, por defecto lo tiene en el puerto 5000 
+Entonces si quieren cambiar de puerto o el que tienen no les sirve tienen que hacerle un Settings.getInstance().setPORT( int ) 
+tanto en el cliente como en el servidor ya que si solo lo hacen en uno, tendrán puertos diferentes (Estuve batallando con ese error como una hora)
+------
+Recuerden que para enviar objetos deben ser serializables
+Pero si heredan de abstractObservable y abstractObserver no lo necesitan porque ya esas abstracciones vienen serializadas 
+los que no hacen un extends de ellos si tienen que poner el implements
+
+Hay detalles importantes
+El servidor va solito ya que solo se ocupa un servidor entonces también es un singleton 
+Pero el cliente está en la abstracción del observador (abstractObserver)
+
+Como el servidor va solito solo hacen 
+SocketServer.getInstance(); y ya el mae se configura solito 
+para enviar objetos solo hacen SocketServer.getInstance().sendMessage(Object message); y ya pueden mandar cualquier vara por ahí 
+
+Si los puertos coinciden, el cliente se configura solito porque a la hora de hacerle new a un objeto que extiende de la clase abstractObserver ya le hace el new SocketClient automáticamente, entonces si quieren recibir datos sería de esta forma maso menos:
+UsuarioRedSocial unUsuario  = new UsuarioRedSocial();
+Object o = unUsuario.client.getMessage(); 
+El objeto puede llegar a ser null si no agarró nada
