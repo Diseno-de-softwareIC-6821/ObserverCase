@@ -4,12 +4,13 @@
  */
 package Interfaces;
 
-import java.net.Socket;
-
 /**
  *
  * @author Esteb
  */
-public interface ISendSocket  {
-    public void send(Object message,Socket toClient);
+public interface ISocket  {
+    public Object receive();
+    public void send(Object message);
+    public void turnOff();
+    
 }

@@ -7,10 +7,7 @@ package Observer;
 
 import Interfaces.IObservable;
 import Interfaces.IObserver;
-import Interfaces.ISend;
-import Socket.SocketServer;
-import java.io.IOException;
-import java.io.Serializable;
+
 
 import java.util.ArrayList;
 
@@ -19,14 +16,14 @@ import java.util.ArrayList;
  *
  * @author Esteb
  */
-public abstract class AbstractObservable implements IObservable, Serializable, ISend<Object>{
-    private final ArrayList<AbstractObserver> observers = new ArrayList<>();
+public abstract class AbstractObservable extends Client implements IObservable{
+    private final ArrayList<IObserver> observers = new ArrayList<>();
     @Override       
-    public void addObserver(AbstractObserver observer) {           
+    public void addObserver(IObserver observer) {           
         this.observers.add(observer);
     }                 
     @Override       
-    public void removeObserver(AbstractObserver observer) {           
+    public void removeObserver(IObserver observer) {           
         this.observers.remove(observer);
     }          
     @Override
