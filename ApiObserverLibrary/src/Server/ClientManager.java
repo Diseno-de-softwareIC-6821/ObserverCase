@@ -24,9 +24,11 @@ public class ClientManager extends Client{
     
     @Override
     public void run() {
-        Object objectRequest = receive(); //el deberá recibir un objeto de tipo request
-        if(objectRequest!=null){
-            send(objectRequest); //object of type request
+        if(this.IsOn()){
+            Object objectRequest = receive(); //el deberá recibir un objeto de tipo request
+            if(objectRequest!=null){
+                send(objectRequest); //object of type request
+            }
         }
         
     }

@@ -8,7 +8,7 @@ package Interfaces;
  *
  * @author Esteb
  */
-public interface ISocket  {
+public interface ISocket {
     public Object receive();
     public void send(Object message);
     public void turnOff();
