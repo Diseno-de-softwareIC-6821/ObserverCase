@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Observer;
+package ApiObserver.Observer;
 
-import Interfaces.ISocket;
-import Socket.Settings;
+import ApiObserver.Interfaces.ISocket;
+import ApiObserver.Socket.Settings;
+
 import java.io.IOException;
 
 import java.net.Socket;

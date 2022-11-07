@@ -2,23 +2,18 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Server;
+package ApiObserver.Server;
 
 
-import Interfaces.ISocket;
-import Socket.Request;
-import Socket.Settings;
+import ApiObserver.Socket.Settings;
+
 import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
-import java.util.Queue;
 /**
  *
  * @author Esteb

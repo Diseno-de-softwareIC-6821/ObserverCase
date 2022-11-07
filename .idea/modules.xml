@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ApiObserver/ApiObserver.iml" filepath="$PROJECT_DIR$/ApiObserver/ApiObserver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ApiObserverLibrary/ApiObserverLibrary.iml" filepath="$PROJECT_DIR$/ApiObserverLibrary/ApiObserverLibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ObserverCase.iml" filepath="$PROJECT_DIR$/.idea/ObserverCase.iml" />
+    </modules>
+  </component>
+</project>
