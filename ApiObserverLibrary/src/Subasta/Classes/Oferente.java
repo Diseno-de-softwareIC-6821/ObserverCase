@@ -1,11 +1,13 @@
 package Subasta.Classes;
 
+import ApiObserver.Interfaces.IObserver;
 import ApiObserver.Observer.Client;
 import Subasta.Interfaces.User;
 
-public class Oferente extends Client implements User {
+public class Oferente extends Client implements IObserver {
 
     private String nick;
+    private String id;
 
     public Oferente(String nick) {
         super();
@@ -20,13 +22,19 @@ public class Oferente extends Client implements User {
         return this.nick;
     }
 
+    public String getId(){
+        return this.id;
+    }
+
+    public void setId(String id){
+        this.id = id;
+    }
+
     public void ingresarSubasta(Subasta subasta){
         SubastasManager.ingresarOferente(this, subasta);
     }
 
-    public void ofertar(float oferta, Subasta subasta){
-        SubastasManager.ofertarProducto(this, oferta, subasta);
-    }
+
 
     @Override
     public Object receive() {
@@ -44,5 +52,8 @@ public class Oferente extends Client implements User {
     }
 
 
-
+    @Override
+    public void notifyObserver(Object source) {
+        System.out.println("notificacion");
+    }
 }

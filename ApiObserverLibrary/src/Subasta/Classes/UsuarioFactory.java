@@ -1,5 +1,6 @@
 package Subasta.Classes;
 
+import ApiObserver.Interfaces.IObserver;
 import Subasta.Enum.EUsuario;
 import Subasta.Interfaces.User;
 
@@ -7,9 +8,11 @@ public class UsuarioFactory {
     public UsuarioFactory(){
 
     }
-
-    public static User getUsuario(EUsuario usuario, String nick){
-        User nuevoUsuario;
+    /*
+    * Cambio de Clase usuario a interfaz User en Oferente y Subastador
+    * */
+    public static IObserver getUsuario(EUsuario usuario, String nick){
+        IObserver nuevoUsuario;
 
         switch(usuario){
             case OFERENTE -> nuevoUsuario = new Oferente(nick);

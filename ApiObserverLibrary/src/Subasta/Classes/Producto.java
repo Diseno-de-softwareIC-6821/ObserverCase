@@ -5,12 +5,13 @@ public class Producto {
     private String descripcion;
     private String imagen;
     private float precioIni;
-    private float precioFin = 0;
+    private float precioFin;
 
     public Producto(String nombre, String descripcion, String imagen) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imagen = imagen;
+        this.precioFin = 0;
     }
 
     public String getNombre() {

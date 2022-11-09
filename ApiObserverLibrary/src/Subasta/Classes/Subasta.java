@@ -1,12 +1,15 @@
 package Subasta.Classes;
 
+import ApiObserver.Interfaces.IObservable;
+import ApiObserver.Interfaces.IObserver;
+import ApiObserver.Observer.Client;
 import Subasta.Enum.EStatus;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class Subasta {
+public class Subasta implements IObservable {
     private String nombre;
     private String descripcion;
     private String imagen;
@@ -16,13 +19,14 @@ public class Subasta {
     private EStatus status;
     private Oferente oferenteGanador;
 
-    private HashMap<Oferente, Float> HashOferentes = new HashMap<>();
-
+    private HashMap<String, Float> HashOferentes = new HashMap<>();
+    private ArrayList<IObserver> Observables;
 
     public Subasta(String nombre, String descripcion, String imagen) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imagen = imagen;
+        this.Observables = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -89,19 +93,38 @@ public class Subasta {
         this.oferenteGanador = oferenteGanador;
     }
 
-    public HashMap<Oferente, Float> getHashOferentes() {
+    public HashMap<String, Float> getHashOferentes() {
         return HashOferentes;
     }
 
-    public void addOferente(Oferente oferente) {
-        this.HashOferentes.put(oferente, 0.0f);
-    }
-
-    public void setHashOferentes(HashMap<Oferente, Float> hashOferentes) {
+    public void setHashOferentes(HashMap<String, Float> hashOferentes) {
         HashOferentes = hashOferentes;
     }
 
-    public void updateOferente(Oferente oferente, float oferta){
+    public void updateOferente(String oferente, float oferta){
         this.HashOferentes.put(oferente, oferta);
+    }
+
+    @Override
+    public void addObserver(IObserver observer) {
+        this.Observables.add(observer);
+
+        Oferente oferente = (Oferente) observer;
+        this.HashOferentes.put(oferente.getId(), 0.0f);
+    }
+
+    @Override
+    public void removeObserver(IObserver observer) {
+        this.Observables.remove(observer);
+
+        Oferente oferente = (Oferente) observer;
+        this.HashOferentes.remove(oferente.getId());
+    }
+
+    @Override
+    public void notifyAllObservers(Object source) {
+        for (IObserver client : this.Observables) {
+            System.out.println(this.producto.getPrecioFin());
+        }
     }
 }

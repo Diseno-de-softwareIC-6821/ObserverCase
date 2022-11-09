@@ -36,7 +36,7 @@ public class Server extends Thread{
         return instance;
     }
     public void turnOn() throws IOException{
-        socketServer=new ServerSocket(Settings.getInstance().getPORT()); // Init the server
+        socketServer = new ServerSocket(Settings.getInstance().getPORT()); // Init the server
         System.out.println("Server started! in port "+ String.valueOf(Settings.getInstance().getPORT()));
         instance.start();
     }
