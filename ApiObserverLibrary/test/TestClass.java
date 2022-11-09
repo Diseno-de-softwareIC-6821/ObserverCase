@@ -1,5 +1,6 @@
 
 import Observer.AbstractObservable;
+import java.util.HashMap;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -12,7 +13,7 @@ import Observer.AbstractObservable;
  */
 public class TestClass   {
    public static void main(String[] args){
-       
+
        
    }
 }

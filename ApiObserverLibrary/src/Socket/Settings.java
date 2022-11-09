@@ -9,15 +9,27 @@ package Socket;
  * @author Esteb
  */
 public class Settings {
+    private final String ALPHA_NUMERIC_STRING = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            +"0123456789"
+            +"abcdefghijklmnopqrstuvwxyz";
     private static Settings instance;
     private int PORT;
     private String HOST;
+    private int hashLenght;
     private boolean isActive;
+    private String idReturnedCode;
     private Settings(){
         this.PORT = 5000; 
         this.HOST = "localhost";
         this.isActive = true;
+        this.hashLenght = 10;
+        idReturnedCode = "000";
     }
+
+    public String getIdReturnedCode() {
+        return idReturnedCode;
+    }
+    
     
     public static Settings getInstance(){
         if(instance ==null){
@@ -48,6 +60,14 @@ public class Settings {
 
     public void turnOffServer(){
         this.isActive = false;
+    }
+    
+    public String getAlphNumericString(){
+        return ALPHA_NUMERIC_STRING;
+    }
+
+    public int getHashLenght() {
+        return hashLenght;
     }
    
     

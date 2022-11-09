@@ -6,7 +6,7 @@ package Server;
 
 
 import Interfaces.ISocket;
-import Socket.Request;
+import Socket.Message;
 import Socket.Settings;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -15,10 +15,9 @@ import java.net.ServerSocket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.HashMap;
 
-import java.util.Queue;
+
 /**
  *
  * @author Esteb
@@ -26,10 +25,10 @@ import java.util.Queue;
  */
 public class Server extends Thread{
     private ServerSocket socketServer;
-    private ArrayList<ClientManager> listManager;
+    private ClientManager manager;
     private static Server instance;
     private Server(){
-        listManager = new ArrayList<>();
+        manager = new ClientManager();
     }
     /*
     Applying singleton in server because we need only one of this
@@ -45,6 +44,7 @@ public class Server extends Thread{
         System.out.println("Server started! in port "+ String.valueOf(Settings.getInstance().getPORT()));
         instance.start();
     }
+
     /*
     *Reading for every new socket is connected
     */
@@ -54,9 +54,9 @@ public class Server extends Thread{
             startToListen();
         }
         //--------------
-        System.out.println("Server off");  
         try {
             socketServer.close();//close server
+            System.out.println("Server off");  
         } catch (IOException ex) {
             Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -67,14 +67,25 @@ public class Server extends Thread{
         try {
             Socket newClient = instance.socketServer.accept(); //waiting client
             System.out.println("new Client connected!"); 
-            ClientManager newManager = new ClientManager(newClient); //set socket of client 
-            new Thread(newManager).start();
-            this.listManager.add(newManager);
+            String newClientKey = manager.getValidKey();
+            ServerClient newServerClient = new ServerClient(newClient, newClientKey);
+            manager.addClient(newClientKey, newServerClient);
+            Message returnMessage = new Message.MessageBuilder()
+                    .setCodeRequest(Settings.getInstance().getIdReturnedCode())
+                    .setDestination(newClientKey).setBody(newClient).build();
+            newServerClient.send(returnMessage);
+            new Thread(newServerClient).start();
+
         }catch (IOException ex) {
            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
        }
     
     }
+
+    public ClientManager getManager() {
+        return manager;
+    }
+    
     
 
     

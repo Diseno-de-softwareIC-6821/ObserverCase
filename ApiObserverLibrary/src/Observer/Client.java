@@ -13,26 +13,37 @@ import java.net.Socket;
 /**
  *
  * @author Esteb
- * @param <T>
  */
 public abstract class Client implements ISocket, Runnable{
     private Socket socket;
     private boolean isOn;
+    private String id;
     
-    public Client(){
-        try {
-            this.socket = new Socket(Settings.getInstance().getHOST(),Settings.getInstance().getPORT());
-            System.out.println("Client connected!");
-            isOn = true;
-        } catch (IOException ex) {
-            System.out.println("Error to connect the client");
+    public Client(){}
+    
+    public void connect(){
+        if(!this.isOn){
+            try{
+                this.socket = new Socket(Settings.getInstance().getHOST(),Settings.getInstance().getPORT());
+                System.out.println("Client connected!");
+                isOn = true;
+                //
+            }catch(IOException ex){
+                System.out.println("Error to connect the client");
+            }
+        }else{//the client is already connected
+            System.out.println("The client has been connected");
         }
-        
+    
+    }
+    public void setId(String id){
+        this.id = id;
     }
     
-    public Client(Socket socket){
+    public Client(Socket socket, String id){
         this.socket = socket;
         isOn = true;
+        this.id = id;
     }
     @Override
     public void turnOff(){

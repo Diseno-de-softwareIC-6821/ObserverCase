@@ -4,64 +4,48 @@
  */
 package Server;
 
-import Observer.Client;
-import Socket.Request;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
+
+import Socket.Settings;
 import java.net.Socket;
+import java.util.HashMap;
 
 /**
  *
  * @author Esteb
  */
-public class ClientManager extends Client{
-    public ClientManager(Socket client){
-        super(client);
+public class ClientManager {
+    private HashMap<String, ServerClient> mapManager;
+    
+    public ClientManager(){
+        mapManager = new HashMap<>();
+    }
+    private String generateRandomKey(){
+        StringBuilder sbuilder = new StringBuilder(Settings.getInstance().getHashLenght());
+        for(int i = 0; i<Settings.getInstance().getHashLenght(); i++){
+            String chain = Settings.getInstance().getAlphNumericString();
+            int random = (int) (chain.length() * Math.random());
+            sbuilder.append(chain.charAt(random));
+        }
+       return sbuilder.toString();
+    }
+    public String getValidKey(){
+        String newKey = generateRandomKey();
+        while(mapManager.get(newKey) != null){
+            newKey = generateRandomKey();
+        }
+        return newKey;
+    }
+    public void addClient(String key, ServerClient client){
+        mapManager.put(key, client);
+    }
+    public void removeClient(String key){
+        mapManager.remove(key);
     }
     
-    @Override
-    public void run() {
-        if(this.IsOn()){
-            Object objectRequest = receive(); //el deberá recibir un objeto de tipo request
-            if(objectRequest!=null){
-                send(objectRequest); //object of type request
-            }
-        }
-        
+    public ServerClient getClient(String key){
+        return mapManager.get(key);
     }
-    //Manager in client
-    @Override
-    public void send(Object message) {
-        Request request = (Request) message; //convert to client
-        Socket destinationSocket = request.getDestination();
-        Object body = request.getMessage();
-        try {
-            OutputStream socketExit = destinationSocket.getOutputStream();
-            ObjectOutputStream chanel = new ObjectOutputStream(socketExit);
-            chanel.writeObject(body);
-            socketExit.close();
-            chanel.close();
-            System.out.println("Object send");
-            } catch (IOException ex) {
-                System.out.println("\n***Error:\n"+ex);
-            }
-    }
-    @Override
-    public Object receive() {
-        Object objectRecieved = null;
-        try{
-           InputStream entry = this.getSocket().getInputStream();
-           ObjectInputStream chanel = new ObjectInputStream(entry);
-           objectRecieved = chanel.readObject();
-           return objectRecieved;
-        }catch(IOException|ClassNotFoundException e){
-           System.out.println(e);
-           return objectRecieved;
-       }
-    }
+    
     
 
 }  

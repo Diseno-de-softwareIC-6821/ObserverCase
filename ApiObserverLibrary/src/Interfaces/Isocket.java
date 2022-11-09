@@ -4,13 +4,16 @@
  */
 package Interfaces;
 
+import Socket.Message;
+
+
 /**
  *
  * @author Esteb
  */
 public interface ISocket {
-    public Object receive();
-    public void send(Object message);
+    public Message receive();
+    public void send(Message message);
     public void turnOff();
     
 }
