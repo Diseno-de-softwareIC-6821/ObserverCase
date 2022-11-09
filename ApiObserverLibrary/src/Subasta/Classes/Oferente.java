@@ -1,9 +1,23 @@
 package Subasta.Classes;
 
-public class Oferente extends Usuario{
+import ApiObserver.Observer.Client;
+import Subasta.Interfaces.User;
+
+public class Oferente extends Client implements User {
+
+    private String nick;
 
     public Oferente(String nick) {
-        super(nick);
+        super();
+        this.nick = nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
+
+    public String getNick() {
+        return this.nick;
     }
 
     public void ingresarSubasta(Subasta subasta){
@@ -13,4 +27,22 @@ public class Oferente extends Usuario{
     public void ofertar(float oferta, Subasta subasta){
         SubastasManager.ofertarProducto(this, oferta, subasta);
     }
+
+    @Override
+    public Object receive() {
+        return null;
+    }
+
+    @Override
+    public void send(Object message) {
+
+    }
+
+    @Override
+    public void run() {
+
+    }
+
+
+
 }

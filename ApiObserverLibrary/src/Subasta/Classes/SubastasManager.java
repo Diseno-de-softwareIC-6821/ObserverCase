@@ -1,5 +1,6 @@
 package Subasta.Classes;
 
+import ApiObserver.Server.Server;
 import Subasta.Enum.EStatus;
 
 import java.util.ArrayList;
