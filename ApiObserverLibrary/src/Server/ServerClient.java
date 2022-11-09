@@ -43,7 +43,7 @@ public class ServerClient extends Client implements Runnable{
     public void send(Message message) {
         ServerClient socketDestination = null; 
         try {
-            socketDestination = Server.getInstance().getManager().getClient(message.getIdDestination());
+            socketDestination = ServerSingleton.getInstance().getManager().getClient(message.getIdDestination());
         } catch (IOException ex) {
             System.out.println("No socket found");
         }
