@@ -6,7 +6,7 @@ package Server;
 
 
 import Interfaces.ISocket;
-import Socket.Message;
+import Socket.MessageKeyReturned;
 import Socket.Settings;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -70,9 +70,7 @@ public class ServerSingleton extends Thread{
             String newClientKey = manager.getValidKey();
             ServerClient newServerClient = new ServerClient(newClient, newClientKey);
             manager.addClient(newClientKey, newServerClient);
-            Message returnMessage = new Message.MessageBuilder()
-                    .setCodeRequest(Settings.getInstance().getIdReturnedCode())
-                    .setDestination(newClientKey).setBody(newClient).build();
+            MessageKeyReturned returnMessage  = new MessageKeyReturned(newClientKey);
             newServerClient.send(returnMessage);
             new Thread(newServerClient).start();
 

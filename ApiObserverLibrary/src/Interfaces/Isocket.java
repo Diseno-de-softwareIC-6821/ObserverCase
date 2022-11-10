@@ -4,7 +4,8 @@
  */
 package Interfaces;
 
-import Socket.Message;
+
+import Socket.abstractMessage;
 
 
 /**
@@ -12,8 +13,8 @@ import Socket.Message;
  * @author Esteb
  */
 public interface ISocket {
-    public Message receive();
-    public void send(Message message);
+    public abstractMessage receive();
+    public void send(abstractMessage message);
     public void turnOff();
     
 }
