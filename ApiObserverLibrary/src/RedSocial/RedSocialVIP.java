@@ -1,13 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package RedSocial;
 
-/**
- *
- * @author maxim
- */
-public class RedSocialVIP {
+import ApiObserver.Server.Server;
+import java.util.ArrayList;
+
+
+public class RedSocialVIP extends Server{
+    private static ArrayList<Post> postsSubidos = new ArrayList<>();
+    private static ArrayList<Artist> artistas = new ArrayList<>();
+    
     
 }
