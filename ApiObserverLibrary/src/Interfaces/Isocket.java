@@ -4,13 +4,17 @@
  */
 package Interfaces;
 
+
+import Socket.abstractMessage;
+
+
 /**
  *
  * @author Esteb
  */
-public interface ISocket  {
-    public Object receive();
-    public void send(Object message);
+public interface ISocket {
+    public abstractMessage receive();
+    public void send(abstractMessage message);
     public void turnOff();
     
 }
