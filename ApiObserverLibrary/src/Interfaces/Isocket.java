@@ -7,10 +7,7 @@ package Interfaces;
 
 import Socket.abstractMessage;
 
-<<<<<<< Updated upstream
 
-=======
->>>>>>> Stashed changes
 /**
  *
  * @author Esteb
