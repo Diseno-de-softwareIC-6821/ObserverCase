@@ -12,11 +12,12 @@ public class MessageKeyReturned extends abstractMessage<String>{
     
     public MessageKeyReturned(String idString){
         super(idString);
+        this.setIdSource(idString);
     }
     
     @Override
     public String doSomething() {
-        return this.getIdDestination();
+        return this.getIdSource();
     }
     
 }

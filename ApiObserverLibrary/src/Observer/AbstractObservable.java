@@ -5,6 +5,7 @@
 package Observer;
 
 
+import Socket.Client;
 import Interfaces.IObservable;
 import Interfaces.IObserver;
 

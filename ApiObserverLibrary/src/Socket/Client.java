@@ -2,13 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Observer;
+package Socket;
 
 import Interfaces.ISocket;
 import Socket.Settings;
 import java.io.IOException;
 
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  *
@@ -18,6 +20,7 @@ public abstract class Client implements ISocket, Runnable{
     private Socket socket;
     private boolean isOn;
     private String id;
+    private LinkedList<String> idothers;
     
     public Client(){}
     
@@ -27,7 +30,8 @@ public abstract class Client implements ISocket, Runnable{
                 this.socket = new Socket(Settings.getInstance().getHOST(),Settings.getInstance().getPORT());
                 System.out.println("Client connected!");
                 isOn = true;
-                //
+                idothers = new LinkedList<>();
+//
             }catch(IOException ex){
                 System.out.println("Error to connect the client");
             }
@@ -56,6 +60,35 @@ public abstract class Client implements ISocket, Runnable{
             }
         }
     }
+    public  void addIdOther(String a){
+        if(idothers != null){
+            idothers.add(a);
+        }else{
+            System.out.println("Connect your client first");
+        }
+       
+    }
+    public  void removeIdOther(String r){
+        if(idothers != null){
+            idothers.remove(r);
+        }else{
+            System.out.println("Connect your client first");
+        }
+    }
+    /**
+     * @return A void String if is not connect or empty, otherwise return the clientId
+    * @code The first one may be the "server request"
+    * 
+    */
+    public String getServerClient(){
+        if(idothers != null){
+            if (idothers.isEmpty()) {
+                return idothers.get(0);
+            }
+        }
+        return "";
+    }
+    
     public boolean IsOn() {
         return isOn;
     }
@@ -63,4 +96,8 @@ public abstract class Client implements ISocket, Runnable{
     public Socket getSocket() {
         return socket;
     }
+
+
+    
+
 }

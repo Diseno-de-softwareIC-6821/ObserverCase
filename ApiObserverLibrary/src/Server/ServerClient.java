@@ -4,7 +4,7 @@
  */
 package Server;
 
-import Observer.Client;
+import Socket.Client;
 import Socket.abstractMessage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,20 +46,17 @@ public class ServerClient extends Client implements Runnable{
         } catch (IOException ex) {
             System.out.println("No socket found");
         }
-        if(socketDestination!= null){        
-            try {
-                OutputStream socketExit = socketDestination.getSocket().getOutputStream();
-                ObjectOutputStream chanel = new ObjectOutputStream(socketExit);
-                chanel.writeObject(message);
-                socketExit.close();
-                chanel.close();
-                System.out.println("Object send");
-            } catch (IOException ex) {
-                    System.out.println("\n***Error:\n"+ex);
-                }
-        }else{
-            System.out.println("Socket has not been connected");
-        }
+        try {
+            OutputStream socketExit = socketDestination.getSocket().getOutputStream();
+            ObjectOutputStream chanel = new ObjectOutputStream(socketExit);
+            chanel.writeObject(message);
+            socketExit.close();
+            chanel.close();
+            System.out.println("Object send");
+        } catch (IOException ex) {
+                System.out.println("\n***Error:\n"+ex);
+            }
+      
     }
     
 

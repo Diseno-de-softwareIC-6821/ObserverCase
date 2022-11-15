@@ -45,7 +45,10 @@ public class ClientManager {
     public ServerClient getClient(String key){
         return mapManager.get(key);
     }
-    
+    public int getAmountClients(){
+        return this.mapManager.size();
+    }
+
     
 
 }  

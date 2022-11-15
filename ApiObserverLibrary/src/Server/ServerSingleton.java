@@ -23,12 +23,11 @@ import java.util.HashMap;
  * @author Esteb
  * @param <T>
  */
-public class ServerSingleton extends Thread{
-    private ServerSocket socketServer;
-    private ClientManager manager;
+public class ServerSingleton extends Server{
+   
     private static ServerSingleton instance;
     private ServerSingleton(){
-        manager = new ClientManager();
+
     }
     /*
     Applying singleton in server because we need only one of this
@@ -39,54 +38,4 @@ public class ServerSingleton extends Thread{
         }
         return instance;
     }
-    public void turnOn() throws IOException{
-        socketServer=new ServerSocket(Settings.getInstance().getPORT()); // Init the server
-        System.out.println("Server started! in port "+ String.valueOf(Settings.getInstance().getPORT()));
-        instance.start();
-    }
-
-    /*
-    *Reading for every new socket is connected
-    */
-    @Override
-    public void run(){
-        while (Settings.getInstance().isActive()) { //while server is on
-            startToListen();
-        }
-        //--------------
-        try {
-            socketServer.close();//close server
-            System.out.println("Server off");  
-        } catch (IOException ex) {
-            Logger.getLogger(ServerSingleton.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-    }
-    /*Method to send message, every request */
-    private void startToListen(){
-        try {
-            Socket newClient = socketServer.accept(); //waiting client
-            System.out.println("new Client connected!"); 
-            String newClientKey = manager.getValidKey();
-            ServerClient newServerClient = new ServerClient(newClient, newClientKey);
-            manager.addClient(newClientKey, newServerClient);
-            MessageKeyReturned returnMessage  = new MessageKeyReturned(newClientKey);
-            newServerClient.send(returnMessage);
-            new Thread(newServerClient).start();
-
-        }catch (IOException ex) {
-           Logger.getLogger(ServerSingleton.class.getName()).log(Level.SEVERE, null, ex);
-       }
-    
-    }
-
-    public ClientManager getManager() {
-        return manager;
-    }
-    
-    
-
-    
-   
-    
 }

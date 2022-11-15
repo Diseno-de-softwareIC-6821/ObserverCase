@@ -25,6 +25,13 @@ public abstract class abstractMessage <T> implements Serializable{
         this.idDestination = idDestination;
     }
 
+
+    public void setIdSource(String idSource) {
+        this.idSource = idSource;
+    }
+
+    
+
     public String getIdSource() {
         return idSource;
     }
