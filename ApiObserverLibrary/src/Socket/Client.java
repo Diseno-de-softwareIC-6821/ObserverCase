@@ -97,7 +97,8 @@ public abstract class Client implements ISocket, Runnable{
         return socket;
     }
 
-
-    
+    public String getSocketKey(){
+        return this.id;
+    }
 
 }
