@@ -11,13 +11,15 @@ import Socket.abstractMessage;
  *
  * @author Esteb
  */
-public class requestArtists extends abstractMessage<Fan> {
+public class RequestArtists extends abstractMessage<Request> {
+
+    public RequestArtists(String idSource, String idDestination, String codeRequest) {
+        super(idSource, idDestination, codeRequest);
+    }
 
     @Override
-    public Fan doSomething() {
-       
-        
-        return null;
+    public Request doSomething() {
+        return Request.REQUEST_ARTIST ;
     }
     
 }
