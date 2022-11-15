@@ -1,5 +1,7 @@
 package RedSocial;
 
+import Model.Post;
+import Model.Artist;
 import ApiObserver.Server.Server;
 import java.util.ArrayList;
 

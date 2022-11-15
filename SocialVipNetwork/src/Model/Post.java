@@ -1,21 +1,18 @@
-package RedSocial;
+package Model;
 
-import ApiObserver.Interfaces.IObservable;
-import ApiObserver.Interfaces.IObserver;
 import java.util.ArrayList;
 
 
-public class Post implements IObservable {
+public class Post   {
     String content;
     int likes;
     int dislikes;
-    private ArrayList<IObserver> Observables;
     
     Post(String content_){
         this.content = content_;
         this.likes = 0;
         this.dislikes = 0;
-        this.Observables = new ArrayList<>();
+
     }
 
     public String getContent() {
@@ -42,26 +39,10 @@ public class Post implements IObservable {
         this.dislikes = dislikes;
     }
 
-    public ArrayList<IObserver> getObservables() {
-        return Observables;
-    }
-
-    public void setObservables(ArrayList<IObserver> Observables) {
-        this.Observables = Observables;
-    }
+  
     //_______________ FUNCIONES PROPIAS ________________________________________________
     
     //_______________ FUNCIONES DEL OBSERVABLE__________________________________________
-    @Override
-    public void addObserver(IObserver observer) {
-    }
 
-    @Override
-    public void removeObserver(IObserver observer) {
-    }
-
-    @Override
-    public void notifyAllObservers(Object source) {
-    }
     
 }

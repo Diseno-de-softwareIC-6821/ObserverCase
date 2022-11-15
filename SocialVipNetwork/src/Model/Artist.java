@@ -1,12 +1,11 @@
-package RedSocial;
+package Model;
 
-import ApiObserver.Interfaces.IObserver;
-import ApiObserver.Observer.Client;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Artist extends Client implements IObserver{
+public class Artist  {
     private int followers;
     private int level;
     private String nick;
@@ -17,8 +16,8 @@ public class Artist extends Client implements IObserver{
         this.followers = 0;
         this.level = 0;
         this.nick = nick_;
-        this.fans = new ArrayList<Fan>();
-        this.posts = new ArrayList<Post>();  
+        this.fans = new ArrayList<>();
+        this.posts = new ArrayList<>();  
     }
     //----------------- SETTERS Y GETTERS ---------------------------------------
 
@@ -77,21 +76,6 @@ public class Artist extends Client implements IObserver{
     
     
     //_______________ FUNCIONES DEL OBSERVER_____________________________________
-    @Override
-    public Object receive() {
-        return null;
-    }
-
-    @Override
-    public void send(Object message) {
-    }
-
-    @Override
-    public void run() {
-    }
-
-    @Override
-    public void notifyObserver(Object source) {
-    }
+ 
     
 }
