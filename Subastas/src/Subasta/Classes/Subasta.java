@@ -1,15 +1,14 @@
 package Subasta.Classes;
 
-import ApiObserver.Interfaces.IObservable;
-import ApiObserver.Interfaces.IObserver;
-import ApiObserver.Observer.Client;
+
+
 import Subasta.Enum.EStatus;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
-public class Subasta implements IObservable {
+public class Subasta   {
     private String nombre;
     private String descripcion;
     private String imagen;
@@ -20,13 +19,13 @@ public class Subasta implements IObservable {
     private Oferente oferenteGanador;
 
     private HashMap<String, Float> HashOferentes = new HashMap<>();
-    private ArrayList<IObserver> Observables;
+
 
     public Subasta(String nombre, String descripcion, String imagen) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.imagen = imagen;
-        this.Observables = new ArrayList<>();
+
     }
 
     public String getNombre() {
@@ -105,26 +104,5 @@ public class Subasta implements IObservable {
         this.HashOferentes.put(oferente, oferta);
     }
 
-    @Override
-    public void addObserver(IObserver observer) {
-        this.Observables.add(observer);
-
-        Oferente oferente = (Oferente) observer;
-        this.HashOferentes.put(oferente.getId(), 0.0f);
-    }
-
-    @Override
-    public void removeObserver(IObserver observer) {
-        this.Observables.remove(observer);
-
-        Oferente oferente = (Oferente) observer;
-        this.HashOferentes.remove(oferente.getId());
-    }
-
-    @Override
-    public void notifyAllObservers(Object source) {
-        for (IObserver client : this.Observables) {
-            System.out.println(this.producto.getPrecioFin());
-        }
-    }
+   
 }

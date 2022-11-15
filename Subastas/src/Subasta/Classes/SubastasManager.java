@@ -1,18 +1,15 @@
 package Subasta.Classes;
 
-import ApiObserver.Interfaces.IObserver;
-import ApiObserver.Observer.Client;
-import ApiObserver.Server.Server;
-import ApiObserver.Socket.Request;
+
 import Subasta.Enum.EStatus;
 
 import java.util.ArrayList;
 import java.util.Date;
 
-public class SubastasManager extends Server{
+public class SubastasManager {
 
     private static ArrayList<Subasta> listaSubastas = new ArrayList<>();
-    private static ArrayList<Client> clientes = new ArrayList<>();
+
 
 //    public SubastasManager(){
 //
@@ -45,9 +42,9 @@ public class SubastasManager extends Server{
         System.out.println("Código de la api para enviar la felicitación");
     }
 
-    public static void ingresarOferente(IObserver oferente, Subasta subasta){
-        subasta.addObserver(oferente);
-    }
+    //public static void ingresarOferente(IObserver oferente, Subasta subasta){
+    //    subasta.addObserver(oferente);
+    //}
 
     public static void ofertarProducto(String oferente, float oferta, Subasta subasta){
         subasta.updateOferente(oferente, oferta);
