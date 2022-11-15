@@ -4,23 +4,24 @@
  */
 package Messages;
 
-import Model.Fan;
+import Model.Artist;
 import Socket.abstractMessage;
-
 
 /**
  *
  * @author Esteb
  */
-public class RequestArtists extends abstractMessage<Request> {
+public class ArtistToFansUpdate extends abstractMessage<Artist>{
+    Artist artist; 
 
-    public RequestArtists(String idSource, String idDestination, String codeRequest) {
-        super(idSource, idDestination, codeRequest);
+    public ArtistToFansUpdate(Artist artist, String idDestination) {
+        super(idDestination);
+        this.artist = artist;
     }
-
+    
     @Override
-    public Request doSomething() {
-        return Request.REQUEST_ARTIST ;
+    public Artist doSomething() {
+        return this.artist;
     }
     
 }

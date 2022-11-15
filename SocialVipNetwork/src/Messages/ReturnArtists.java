@@ -6,6 +6,7 @@ package Messages;
 
 import Model.Artist;
 import Socket.abstractMessage;
+
 import java.util.ArrayList;
 
 /**
@@ -14,8 +15,8 @@ import java.util.ArrayList;
  */
 public class ReturnArtists extends abstractMessage<ArrayList<Artist>>{
     ArrayList<Artist> artistList; 
-    public ReturnArtists(String idSource, String idDestination, String codeRequest, ArrayList<Artist> list) {
-        super(idSource, idDestination, codeRequest);
+    public ReturnArtists(String idSource, String idDestination, ArrayList<Artist> list) {
+        super(idSource, idDestination, "");
         artistList = list;
         
     }

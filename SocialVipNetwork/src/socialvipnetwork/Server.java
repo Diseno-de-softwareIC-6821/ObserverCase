@@ -4,6 +4,7 @@
  */
 package socialvipnetwork;
 
+
 import Server.ServerSingleton;
 import Socket.Settings;
 import java.io.IOException;
@@ -19,13 +20,9 @@ public class Server {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        try {
-            Settings.getInstance().setPORT(6666);
-            ServerSingleton.getInstance().turnOn();
-        } catch (IOException ex) {
-            System.out.println("Cannot turn on server");
-        }
+    public static void main(String[] args) throws IOException {
+        Settings.getInstance().setPORT(5432);
+        ServerSingleton.getInstance().turnOn();
     }
     
 }

@@ -1,26 +1,33 @@
 package Model;
 
 
-import Observer.Client;
+
+
+import Interfaces.IObservable;
+import Interfaces.IObserver;
+import Socket.Client;
 import Socket.abstractMessage;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Artist extends Client {
+public class Artist extends Client implements IObservable{
     private int followers;
     private int level;
     private String nick;
     private ArrayList<Fan> fans;
     private ArrayList<Post> posts;
+    private boolean isActive;
     
     Artist(String nick_){
         this.followers = 0;
         this.level = 0;
         this.nick = nick_;
         this.fans = new ArrayList<>();
-        this.posts = new ArrayList<>();  
+        this.posts = new ArrayList<>();
+        this.isActive = true;
     }
+    
     //----------------- SETTERS Y GETTERS ---------------------------------------
 
     public int getFollowers() {
@@ -93,6 +100,22 @@ public class Artist extends Client {
     public void run() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
- 
+
+    @Override
+    public void addObserver(IObserver io) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void removeObserver(IObserver io) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void notifyAllObservers(Object o) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+
     
 }

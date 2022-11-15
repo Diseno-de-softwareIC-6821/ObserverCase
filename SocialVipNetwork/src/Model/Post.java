@@ -4,14 +4,16 @@ import java.util.ArrayList;
 
 
 public class Post   {
-    String content;
-    int likes;
-    int dislikes;
+    private String content;
+    private int likes;
+    private int dislikes;
+    private Artist artist;
     
-    Post(String content_){
-        this.content = content_;
+    Post(String content, Artist artist){
+        this.content = content;
         this.likes = 0;
         this.dislikes = 0;
+        this.artist = artist;
 
     }
 
@@ -43,6 +45,10 @@ public class Post   {
     //_______________ FUNCIONES PROPIAS ________________________________________________
     
     //_______________ FUNCIONES DEL OBSERVABLE__________________________________________
+
+    public Artist getArtist() {
+        return artist;
+    }
 
     
 }
