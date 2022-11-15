@@ -19,7 +19,8 @@ public class Artist extends Client implements IObservable{
     private ArrayList<Post> posts;
     private boolean isActive;
     
-    Artist(String nick_){
+    public Artist(String nick_){
+        super();
         this.followers = 0;
         this.level = 0;
         this.nick = nick_;

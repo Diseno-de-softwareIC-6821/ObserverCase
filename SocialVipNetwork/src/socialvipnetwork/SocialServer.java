@@ -82,7 +82,8 @@ public class SocialServer extends Client{
             ArtistToFansUpdate pmessage = (ArtistToFansUpdate) message;
             artistToFanUpdate(pmessage );
             removeArtist(pmessage.doSomething());
-        }else if(message instanceof )
+            
+        }
     }
     
     private void artistToFanUpdate(ArtistToFansUpdate message){
