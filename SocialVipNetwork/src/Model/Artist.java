@@ -1,11 +1,13 @@
 package Model;
 
 
+import Observer.Client;
+import Socket.abstractMessage;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Artist  {
+public class Artist extends Client {
     private int followers;
     private int level;
     private String nick;
@@ -76,6 +78,21 @@ public class Artist  {
     
     
     //_______________ FUNCIONES DEL OBSERVER_____________________________________
+
+    @Override
+    public abstractMessage receive() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void send(abstractMessage a) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void run() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
  
     
 }
