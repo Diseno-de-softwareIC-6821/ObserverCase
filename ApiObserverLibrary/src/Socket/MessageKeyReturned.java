@@ -8,7 +8,7 @@ package Socket;
  *
  * @author Esteb
  */
-public class MessageKeyReturned extends abstractMessage<String>{
+public class MessageKeyReturned extends abstractMessage<String, Client>{
     
     public MessageKeyReturned(String idString){
         super(idString);
@@ -16,7 +16,8 @@ public class MessageKeyReturned extends abstractMessage<String>{
     }
     
     @Override
-    public String doSomething() {
+    public String doSomething(Client toChange) {
+        toChange.setId(this.getIdSource());
         return this.getIdSource();
     }
     

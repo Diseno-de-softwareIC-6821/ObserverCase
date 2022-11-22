@@ -7,10 +7,6 @@ package Server;
 import Socket.Client;
 import Socket.abstractMessage;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 import java.net.Socket;
 
 
@@ -20,52 +16,25 @@ import java.net.Socket;
  */
 public class ServerClient extends Client implements Runnable{
     
-    public ServerClient(Socket socket, String id){
+    public ServerClient(Socket socket, String id) throws IOException{
         super(socket, id); //socket that was recieved by server
     }
-    
-    @Override
-    public abstractMessage receive() {
-        abstractMessage objectRecieved = null;
-        try{
-           InputStream entry = this.getSocket().getInputStream();
-           ObjectInputStream chanel = new ObjectInputStream(entry);
-           objectRecieved = (abstractMessage) chanel.readObject();
-           return objectRecieved;
-        }catch(IOException|ClassNotFoundException e){
-           System.out.println(e);
-           return objectRecieved;
-       }
-    }
-
-    @Override
-    public void send(abstractMessage message) {
+    public void sendTo(abstractMessage message){
         ServerClient socketDestination = null; 
         try {
-            socketDestination = ServerSingleton.getInstance().getManager().getClient(message.getIdDestination());
+            socketDestination = ServerSingleton.getInstance().getManager().getClient(message.getIdDestination());    
+            socketDestination.send(message); //send message to theirselve
         } catch (IOException ex) {
-            System.out.println("No socket found");
+            System.out.println("No socket found, message has not been sended");
         }
-        try {
-            OutputStream socketExit = socketDestination.getSocket().getOutputStream();
-            ObjectOutputStream chanel = new ObjectOutputStream(socketExit);
-            chanel.writeObject(message);
-            socketExit.close();
-            chanel.close();
-            System.out.println("Object send");
-        } catch (IOException ex) {
-                System.out.println("\n***Error:\n"+ex);
-            }
-      
     }
-    
 
     @Override
     public void run() {
         while (this.IsOn()) {            
             abstractMessage message = receive();
-            send(message);
- 
+            System.out.print(message.getIdSource()+"send to -> Server send to ->"+message.getIdDestination());
+            sendTo(message);
         }
     }
     

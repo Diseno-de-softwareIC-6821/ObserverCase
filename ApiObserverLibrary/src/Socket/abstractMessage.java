@@ -11,40 +11,29 @@ import java.net.Socket;
  *
  * @author Esteb
  */
-public abstract class abstractMessage <T> implements Serializable{
-    private String idSource;
-    private String idDestination;
-    private String codeRequest;
+public abstract class abstractMessage <T, A> implements Serializable{
+    private String idSource="";
+    private String idDestination="";
 
-    public abstractMessage(String idSource, String idDestination, String codeRequest){
+    public abstractMessage(String idSource, String idDestination){
         this.idSource = idSource;
         this.idDestination = idDestination;
-        this.codeRequest = codeRequest;
     }
     public abstractMessage(String idDestination){
         this.idDestination = idDestination;
     }
-
-
     public void setIdSource(String idSource) {
         this.idSource = idSource;
     }
-
     
-
     public String getIdSource() {
         return idSource;
     }
-
     public String getIdDestination() {
         return idDestination;
     }
 
-    public String getCodeRequest() {
-        return codeRequest;
-    }
-    
-    public abstract T doSomething();
+    public abstract T doSomething(A toChange);
     
     //request builder 
 }

@@ -5,11 +5,10 @@
 package Socket;
 
 import Interfaces.ISocket;
-import Socket.Settings;
 import java.io.IOException;
-
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 /**
@@ -18,9 +17,12 @@ import java.util.LinkedList;
  */
 public abstract class Client implements ISocket, Runnable{
     private Socket socket;
-    private boolean isOn;
-    private String id;
-    private LinkedList<String> idothers;
+    private boolean isOn = false;
+    private String id= "";
+    private LinkedList<String> idOthersSockets;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
+    
     
     public Client(){}
     
@@ -30,8 +32,9 @@ public abstract class Client implements ISocket, Runnable{
                 this.socket = new Socket(Settings.getInstance().getHOST(),Settings.getInstance().getPORT());
                 System.out.println("Client connected!");
                 isOn = true;
-                idothers = new LinkedList<>();
-//
+                idOthersSockets = new LinkedList<>();
+                in = new ObjectInputStream(this.socket.getInputStream());
+                out = new ObjectOutputStream(this.socket.getOutputStream());
             }catch(IOException ex){
                 System.out.println("Error to connect the client");
             }
@@ -44,51 +47,43 @@ public abstract class Client implements ISocket, Runnable{
         this.id = id;
     }
     
-    public Client(Socket socket, String id){
+    
+    public Client(Socket socket, String id) throws IOException{
         this.socket = socket;
         isOn = true;
         this.id = id;
+        idOthersSockets = new LinkedList<>();
+        in = new ObjectInputStream(this.socket.getInputStream());
+        out = new ObjectOutputStream(this.socket.getOutputStream());
     }
     @Override
     public void turnOff(){
         if(this.socket!=null){
             try {
                 this.isOn = false;
-                this.socket.close();
+                this.out.close();
+                this.in.close();
+                this.socket.close();       
             } catch (IOException ex) {
                 System.err.println("problem to turn off socket");
             }
         }
     }
     public  void addIdOther(String a){
-        if(idothers != null){
-            idothers.add(a);
+        if(idOthersSockets != null){
+            idOthersSockets.add(a);
         }else{
-            System.out.println("Connect your client first");
+            System.out.println("Be connected first");
         }
        
     }
     public  void removeIdOther(String r){
-        if(idothers != null){
-            idothers.remove(r);
+        if(idOthersSockets != null){
+            idOthersSockets.remove(r);
         }else{
-            System.out.println("Connect your client first");
+            System.out.println("be Connected first");
         }
     }
-    /**
-     * @return A void String if is not connect or empty, otherwise return the clientId
-    * @code The first one may be the "server request"
-    * 
-    */
-    public String getServerClient(){
-        if(idothers != null){
-            if (idothers.isEmpty()) {
-                return idothers.get(0);
-            }
-        }
-        return "";
-    }
-    
     public boolean IsOn() {
         return isOn;
     }
@@ -100,5 +95,28 @@ public abstract class Client implements ISocket, Runnable{
     public String getSocketKey(){
         return this.id;
     }
-
+    @Override
+    public void send(abstractMessage message){
+        if(this.IsOn()){
+            try{
+                out.writeObject(message);
+                System.out.print(this.id+" send->");
+            }catch(IOException ex ){
+                System.out.println("Cannot send message");
+            }
+        }
+    }
+    @Override
+    public abstractMessage receive( ){
+        abstractMessage objectRecieved = null;
+        try{
+           objectRecieved = (abstractMessage) in.readObject();
+           System.out.println(this.id+ " received sucessfully");
+           return objectRecieved;
+        }catch(IOException|ClassNotFoundException e){
+           System.out.println(e);
+           return objectRecieved;
+       }
+    
+    }
 }

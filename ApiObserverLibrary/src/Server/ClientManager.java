@@ -19,19 +19,11 @@ public class ClientManager {
     public ClientManager(){
         mapManager = new HashMap<>();
     }
-    private String generateRandomKey(){
-        StringBuilder sbuilder = new StringBuilder(Settings.getInstance().getHashLenght());
-        for(int i = 0; i<Settings.getInstance().getHashLenght(); i++){
-            String chain = Settings.getInstance().getAlphNumericString();
-            int random = (int) (chain.length() * Math.random());
-            sbuilder.append(chain.charAt(random));
-        }
-       return sbuilder.toString();
-    }
-    public String getValidKey(){
-        String newKey = generateRandomKey();
-        while(mapManager.get(newKey) != null){
-            newKey = generateRandomKey();
+  
+    public String getRandKey(){
+        String newKey = String.valueOf(java.util.UUID.randomUUID());
+        while(mapManager.get(newKey) != null){ //this is a high improbably but we need to prevent
+            newKey = String.valueOf(java.util.UUID.randomUUID());
         }
         return newKey;
     }
