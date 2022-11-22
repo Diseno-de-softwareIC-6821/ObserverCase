@@ -5,6 +5,7 @@
 package socialvipnetwork;
 
 import Model.Fan;
+import Socket.Settings;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +20,7 @@ public class FanUI extends javax.swing.JFrame {
     Fan me;
     public FanUI() {
         initComponents();
+        Settings.getInstance().setPORT(6543);
         String nombre = JOptionPane.showInputDialog("Inserte el nombre de usuario");
         me = new Fan(nombre);
         me.connect();

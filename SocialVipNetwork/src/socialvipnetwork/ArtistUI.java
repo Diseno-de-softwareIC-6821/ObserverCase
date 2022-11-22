@@ -5,6 +5,7 @@
 package socialvipnetwork;
 
 import Model.Artist;
+import Socket.Settings;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,7 +20,7 @@ public class ArtistUI extends javax.swing.JFrame {
     Artist me;
     public ArtistUI() {
         initComponents();
-        
+        Settings.getInstance().setPORT(6543);
         String name  = JOptionPane.showInputDialog("Ingrese el nickname");
         me = new Artist(name);
         me.connect();

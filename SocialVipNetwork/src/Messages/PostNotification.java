@@ -16,7 +16,7 @@ public class PostNotification extends abstractMessage<Post>{
     private Post post;
 
     public PostNotification(Post post, String destination) {
-        super(post.getArtist().getSocketId(), destination, "");
+        super(post.getArtist().getSocketKey(), destination, "");
         this.post = post;
  
     }

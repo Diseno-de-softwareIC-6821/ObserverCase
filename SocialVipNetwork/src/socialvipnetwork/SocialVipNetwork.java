@@ -1,7 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
+
+import Server.ServerSingleton;
+import Socket.Settings;
+import java.io.IOException;
+
+
 
 /**
  *
@@ -12,8 +14,9 @@ public class SocialVipNetwork {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    public static void main(String[] args) throws IOException {
+        Settings.getInstance().setPORT(6543);
+        ServerSingleton.getInstance().turnOn();
     }
     
 }
