@@ -5,8 +5,6 @@
 package Server;
 
 
-import Socket.Settings;
-import java.net.Socket;
 import java.util.HashMap;
 
 /**
@@ -14,11 +12,9 @@ import java.util.HashMap;
  * @author Esteb
  */
 public class ClientManager {
-    private HashMap<String, ServerClient> mapManager;
+    private HashMap<String, ServerClient> mapManager = new HashMap<>();
     
-    public ClientManager(){
-        mapManager = new HashMap<>();
-    }
+    public ClientManager(){}
   
     public String getRandKey(){
         String newKey = String.valueOf(java.util.UUID.randomUUID());

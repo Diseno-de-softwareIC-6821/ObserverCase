@@ -63,10 +63,9 @@ public abstract class Server extends Thread{
     
     }
     /**
+     * @return return ClientsManager
      *@@code Do something when new ClientsConected
      */
-
-
     public ClientManager getManager() {
         return manager;
     }

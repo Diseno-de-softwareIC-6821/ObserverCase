@@ -33,8 +33,7 @@ public abstract class Client implements ISocket, Runnable{
                 System.out.println("Client connected!");
                 isOn = true;
                 idOthersSockets = new LinkedList<>();
-                in = new ObjectInputStream(this.socket.getInputStream());
-                out = new ObjectOutputStream(this.socket.getOutputStream());
+
             }catch(IOException ex){
                 System.out.println("Error to connect the client");
             }
@@ -53,8 +52,7 @@ public abstract class Client implements ISocket, Runnable{
         isOn = true;
         this.id = id;
         idOthersSockets = new LinkedList<>();
-        in = new ObjectInputStream(this.socket.getInputStream());
-        out = new ObjectOutputStream(this.socket.getOutputStream());
+
     }
     @Override
     public void turnOff(){
@@ -99,6 +97,7 @@ public abstract class Client implements ISocket, Runnable{
     public void send(abstractMessage message){
         if(this.IsOn()){
             try{
+                out = new ObjectOutputStream(this.socket.getOutputStream());
                 out.writeObject(message);
                 System.out.print(this.id+" send->");
             }catch(IOException ex ){
@@ -110,9 +109,10 @@ public abstract class Client implements ISocket, Runnable{
     public abstractMessage receive( ){
         abstractMessage objectRecieved = null;
         try{
-           objectRecieved = (abstractMessage) in.readObject();
-           System.out.println(this.id+ " received sucessfully");
-           return objectRecieved;
+            in = new ObjectInputStream(this.socket.getInputStream());
+            objectRecieved = (abstractMessage) in.readObject();
+            System.out.println(this.id+ " received sucessfully");
+            return objectRecieved;
         }catch(IOException|ClassNotFoundException e){
            System.out.println(e);
            return objectRecieved;
