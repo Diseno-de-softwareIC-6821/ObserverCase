@@ -19,28 +19,25 @@ public abstract class Client implements ISocket, Runnable{
     private Socket socket;
     private boolean isOn = false;
     private String id= "";
-    private LinkedList<String> idOthersSockets;
+    private LinkedList<String> idOthersSockets = new LinkedList<>();;
     private ObjectInputStream in;
     private ObjectOutputStream out;
     
     
     public Client(){}
     
-    public void connect(){
-        if(!this.isOn){
-            try{
-                this.socket = new Socket(Settings.getInstance().getHOST(),Settings.getInstance().getPORT());
-                System.out.println("Client connected!");
-                isOn = true;
-                idOthersSockets = new LinkedList<>();
-
-            }catch(IOException ex){
-                System.out.println("Error to connect the client");
-            }
+    public String connect() throws ClassNotFoundException, IOException{
+        if(!this.isOn){ 
+            this.socket = new Socket(Settings.getInstance().getHOST(),Settings.getInstance().getPORT());
+            System.out.println("Client connected!");
+            isOn = true;
+            in = new ObjectInputStream(this.socket.getInputStream());
+            MessageKeyReturned message = (MessageKeyReturned) in.readObject();
+            message.doSomething(this);
         }else{//the client is already connected
             System.out.println("The client has been connected");
         }
-    
+        return this.id;
     }
     public void setId(String id){
         this.id = id;
@@ -51,8 +48,6 @@ public abstract class Client implements ISocket, Runnable{
         this.socket = socket;
         isOn = true;
         this.id = id;
-        idOthersSockets = new LinkedList<>();
-
     }
     @Override
     public void turnOff(){

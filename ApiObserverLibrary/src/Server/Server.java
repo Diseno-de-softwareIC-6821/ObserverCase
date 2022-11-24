@@ -55,8 +55,6 @@ public abstract class Server extends Thread{
             new Thread(newServerClient).start();
             MessageKeyReturned returnKey  = new MessageKeyReturned(key);
             newServerClient.send(returnKey);
-        
-           
         }catch (IOException ex) {
            Logger.getLogger(ServerSingleton.class.getName()).log(Level.SEVERE, null, ex);
        }
