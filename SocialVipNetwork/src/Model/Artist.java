@@ -5,13 +5,16 @@ package Model;
 
 import Interfaces.IObservable;
 import Interfaces.IObserver;
+import Messages.ActualizarArtistas;
+import Observer.AbstractObservable;
 import Socket.Client;
 import Socket.abstractMessage;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class Artist extends Client implements IObservable{
+public class Artist extends AbstractObservable implements Serializable{
     private int followers;
     private int level;
     private String nick;
@@ -78,11 +81,11 @@ public class Artist extends Client implements IObservable{
     public void sharePost(){     
     }
     
-    public void retire(){
+    public void darseDeBaja(){
+        this.isActive = false;
     }
     
-    public void notificarFans(){
-    }
+  
     
     
     //_______________ FUNCIONES DEL OBSERVER_____________________________________
@@ -99,21 +102,6 @@ public class Artist extends Client implements IObservable{
 
     @Override
     public void run() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void addObserver(IObserver io) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void removeObserver(IObserver io) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public void notifyAllObservers(Object o) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
