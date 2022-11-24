@@ -9,6 +9,6 @@ package Interfaces;
  *
  * @author Esteb
  */
-public interface IObserver {
-    public void notifyObserver(Object source);   
+public interface IObserver <T>{
+    public void notifyObserver(T source);   
 }
