@@ -6,6 +6,9 @@ package socialvipnetwork;
 
 import Model.Fan;
 import Socket.Settings;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,10 +23,15 @@ public class FanUI extends javax.swing.JFrame {
     Fan me;
     public FanUI() {
         initComponents();
-        Settings.getInstance().setPORT(6543);
+        Settings.getInstance().setPORT(5432);
         String nombre = JOptionPane.showInputDialog("Inserte el nombre de usuario");
         me = new Fan(nombre);
-        me.connect();
+        try {
+            String key =me.connect();
+            jLabelUserKey.setText("User key: "+key);
+        } catch (ClassNotFoundException | IOException ex) {
+            System.out.println("No se pudo conectar el cliente "+ ex);
+        }
     }
 
     /**
@@ -35,17 +43,27 @@ public class FanUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabelUserKey = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabelUserKey.setText("Key");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 644, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelUserKey)
+                .addContainerGap(619, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 447, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelUserKey)
+                .addContainerGap(425, Short.MAX_VALUE))
         );
 
         pack();
@@ -88,5 +106,6 @@ public class FanUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabelUserKey;
     // End of variables declaration//GEN-END:variables
 }

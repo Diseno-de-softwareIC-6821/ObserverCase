@@ -3,11 +3,11 @@ package Model;
 
 
 import java.util.ArrayList;
-import java.util.List;
 import Socket.Client;
 import Socket.abstractMessage;
+import java.io.Serializable;
 
-public class Fan extends Client{
+public class Fan extends Client implements Serializable{
     private int following;
     private String nick;
     private ArrayList<Artist> artistasSeguidos;

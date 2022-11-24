@@ -6,6 +6,9 @@ package socialvipnetwork;
 
 import Model.Artist;
 import Socket.Settings;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,7 +26,12 @@ public class ArtistUI extends javax.swing.JFrame {
         Settings.getInstance().setPORT(6543);
         String name  = JOptionPane.showInputDialog("Ingrese el nickname");
         me = new Artist(name);
-        me.connect();
+        try {
+            String key =me.connect();
+            jLabelUserKey.setText("User key"+key);
+        } catch (ClassNotFoundException | IOException ex) {
+            System.out.println("Error al conectar el cliente ");
+        }
     }
 
     /**
@@ -35,17 +43,27 @@ public class ArtistUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabelUserKey = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabelUserKey.setText("User key:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelUserKey)
+                .addContainerGap(347, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelUserKey)
+                .addContainerGap(278, Short.MAX_VALUE))
         );
 
         pack();
@@ -87,5 +105,6 @@ public class ArtistUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabelUserKey;
     // End of variables declaration//GEN-END:variables
 }

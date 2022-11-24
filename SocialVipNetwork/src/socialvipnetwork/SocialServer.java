@@ -4,17 +4,10 @@
  */
 package socialvipnetwork;
 
-import Messages.ArtistToFansUpdate;
-import Messages.RequestArtists;
-import Messages.ReturnArtists;
 import Model.Artist;
 import Model.Fan;
 import Socket.Client;
-import Socket.MessageKeyReturned;
-import Socket.abstractMessage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
+
 import java.util.ArrayList;
 
 /**
@@ -32,6 +25,7 @@ public class SocialServer extends Client{
     private static SocialServer getInstance(){
         if(instance!=null){
             instance = new SocialServer();
+            
         }
         return instance;
     }
@@ -44,58 +38,12 @@ public class SocialServer extends Client{
     }
 
     @Override
-    public abstractMessage receive() {
-        abstractMessage objectRecieved = null; 
-        try{
-            InputStream entry = this.getSocket().getInputStream();
-            ObjectInputStream chanel = new ObjectInputStream(entry);
-            objectRecieved= (abstractMessage) chanel.readObject();
-            return objectRecieved;
-        }catch(IOException | ClassNotFoundException e ){
-            return objectRecieved;
-        }
-       
-    }
-
-    @Override
-    public void send(abstractMessage a) {
-        
-
-    }
-
-    @Override
     public void run() {
-        while(IsOn()){
-            abstractMessage amessage = receive();
-            
-        }
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
-    }
-    public void doSomething(abstractMessage message){
-        if(message instanceof MessageKeyReturned){
-            this.setId((String) message.doSomething());
-        }else if(message instanceof RequestArtists){
-            String keyRequest = ((RequestArtists) message).getIdSource();
-            ReturnArtists returnedArtist = new ReturnArtists(this.getSocketKey(), keyRequest, listaArtistas);
-            send(returnedArtist);
-        }else if(message instanceof ArtistToFansUpdate){
-            ArtistToFansUpdate pmessage = (ArtistToFansUpdate) message;
-            artistToFanUpdate(pmessage );
-            removeArtist(pmessage.doSomething());
-            
-        }
-    }
-    
-    private void artistToFanUpdate(ArtistToFansUpdate message){
-        Artist artist = ((ArtistToFansUpdate) message).doSomething();
-        for(Fan artisFan : artist.getFans()){
-            String key = artisFan.getSocketKey();
-            ArtistToFansUpdate messageUpdate = new ArtistToFansUpdate(artist, key);
-            send(messageUpdate);
-        }
-        
-    }
+}
    
     
     
-}
+
